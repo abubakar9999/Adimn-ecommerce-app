@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:admin_ecommarce/models/category_model.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,5 +41,23 @@ class CustomHttpRequest {
       }
     }
     return orderData;
+  }
+
+  facthCategory() async {
+    List<CategoryModel> categorydata = [];
+    late CategoryModel categoryModel;
+
+    var respons = await http.get(
+        Uri.parse("https://apihomechef.antopolis.xyz/api/admin/category"),
+        headers: await CustomHttpRequest().getHeaderWithToken());
+
+    var data = jsonDecode(respons.body);
+    if (respons.statusCode == 200) {
+      for (var catdata in data) {
+        categoryModel = CategoryModel.fromJson(catdata);
+        categorydata.add(categoryModel);
+      }
+    }
+    return categorydata;
   }
 }

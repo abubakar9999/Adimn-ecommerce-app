@@ -29,8 +29,8 @@ class _SingInPageState extends State<SingInPage> {
     sharedPreferences = await SharedPreferences.getInstance();
     token = sharedPreferences!.getString("token");
     if (token!.isNotEmpty) {
-      // Navigator.of(context).pushReplacement(
-      //     MaterialPageRoute(builder: (context) => BottomNav()));
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => TabMenu()));
     } else {
       print("token is null");
     }
@@ -52,9 +52,10 @@ class _SingInPageState extends State<SingInPage> {
         sharedPreferences!.setString("token", data["access_token"]);
       });
       token = sharedPreferences!.getString("token");
-      print("Token Saved $token");
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (context) => TabMenu()));
+      print("Token Saved $token");
+
       showInToast("Login Succesfull");
     } else {
       showInToast("Login Failed");

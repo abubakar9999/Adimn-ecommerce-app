@@ -1,4 +1,6 @@
+import 'package:admin_ecommarce/pages/auth/sign_In_page.dart';
 import 'package:admin_ecommarce/pages/bottomNavigation.dart';
+import 'package:admin_ecommarce/provider/category_provider.dart';
 
 import 'package:admin_ecommarce/provider/order_provider.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,9 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<OrderProvider>(create: (context) => OrderProvider())
+    ChangeNotifierProvider<OrderProvider>(create: (context) => OrderProvider()),
+    ChangeNotifierProvider<CategoryProvider>(
+        create: (context) => CategoryProvider())
   ], child: const MyApp()));
 }
 
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TabMenu(),
+      home: SingInPage(),
     );
   }
 }
