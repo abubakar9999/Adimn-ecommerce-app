@@ -43,16 +43,101 @@ class _CategoryPagState extends State<CategoryPag> {
                     return true;
                   },
                   child: Container(
-                    child: ListView.builder(
-                        itemCount: catagorydata.categorydata.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                              child: Column(
-                            children: <Widget>[
-                              Text("${catagorydata.categorydata[index].name}")
-                            ],
-                          ));
-                        }),
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 2 / 1.8,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                      ),
+                      itemCount: catagorydata.categorydata.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                "https://apihomechef.antopolis.xyz/images/${catagorydata.categorydata[index].image}"),
+                                            fit: BoxFit.cover)),
+                                  ),
+                                  Positioned(
+                                      child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        height: 20,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                            color:
+                                                primaryColor.withOpacity(0.5),
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(15),
+                                                bottomRight:
+                                                    Radius.circular(10))),
+                                      ),
+                                      Positioned(
+                                        top: 0,
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 0,
+                                          width: 80,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Expanded(
+                                                child: IconButton(
+                                                    icon: Icon(
+                                                      Icons.edit,
+                                                      size: 15,
+                                                      color: Colors.white,
+                                                    ),
+                                                    onPressed: () {}),
+                                              ),
+                                              Expanded(
+                                                child: IconButton(
+                                                  icon: Icon(
+                                                    Icons.delete,
+                                                    size: 15,
+                                                    color: Colors.white,
+                                                  ),
+                                                  onPressed: () {},
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                                  Positioned(
+                                    bottom: 10,
+                                    right: 10,
+                                    child: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            "https://apihomechef.antopolis.xyz/images/${catagorydata.categorydata[index].icon}")),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Text(
+                              "${catagorydata.categorydata[index].name}",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        );
+                      },
+                    ),
                   ),
                 )
               : CircularProgressIndicator()),
