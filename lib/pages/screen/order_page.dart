@@ -24,10 +24,31 @@ class _OrderPageState extends State<OrderPage> {
     final mydata = Provider.of<OrderProvider>(context);
     return Scaffold(
       body: ListView.builder(
-          itemCount: mydata.orderData.length,
-          itemBuilder: (context, index) {
-            return Text("${mydata.orderData[index].user!.name}");
-          }),
+        itemCount: mydata.orderData.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            child: Container(
+                child: Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text(mydata.orderData[index].user!.name.toString()),
+                  subtitle: Text(mydata.orderData[index].payment.toString()),
+                  leading: CircleAvatar(
+                    child: Text(mydata.orderData[index].id.toString()),
+                  ),
+                  trailing: Column(
+                    children: <Widget>[
+                      Text(mydata.orderData[index].price.toString()),
+                      Text(mydata.orderData[index].discount.toString()),
+                      Text(mydata.orderData[index].quantity.toString()),
+                    ],
+                  ),
+                ),
+              ],
+            )),
+          );
+        },
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:admin_ecommarce/models/category_model.dart';
+import 'package:admin_ecommarce/widgets/tost_message.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -59,5 +60,19 @@ class CustomHttpRequest {
       }
     }
     return categorydata;
+  }
+
+  static Future<dynamic> deleteCatagory(int id) async {
+    var respons = await http.delete(
+      Uri.parse(
+          "https://apihomechef.antopolis.xyz/api/admin/category/$id/delete"),
+      headers: await CustomHttpRequest().getHeaderWithToken(),
+    );
+
+    if (respons.statusCode == 200) {
+      showInToast("Delete  SuccessFull");
+    } else {
+      showInToast("Delete Errror");
+    }
   }
 }

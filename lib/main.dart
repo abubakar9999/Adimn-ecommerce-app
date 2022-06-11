@@ -6,6 +6,8 @@ import 'package:admin_ecommarce/provider/order_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'pages/auth/register_Page.dart';
+
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<OrderProvider>(create: (context) => OrderProvider()),
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SingInPage(),
+      home: Register(),
     );
   }
 }
